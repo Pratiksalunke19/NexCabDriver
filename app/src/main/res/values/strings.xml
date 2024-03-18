@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">NexCabDriver</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="home">Home</string>
+    <string name="rides">Rides</string>
+    <string name="title_inbox">Inbox</string>
+    <string name="title_settings">Settings</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="empty_inbox">Oops! No messages Yet</string>
+    <string name="welcomeback">Welcome Back</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgotpassword">Forgot password?</string>
+    <string name="login">Login</string>
+    <string name="newusersignup">NEW USER? SIGN UP</string>
+    <string name="createAccount">Create Account</string>
+    <string name="firstname">Firstname</string>
+    <string name="lastname">Lastname</string>
+    <string name="passwordrepeat">Repeat password</string>
+    <string name="signup">SIGN UP</string>
+</resources>

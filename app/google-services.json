@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "494409399932",
+    "firebase_url": "https://nexcab-6112c-default-rtdb.firebaseio.com",
+    "project_id": "nexcab-6112c",
+    "storage_bucket": "nexcab-6112c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:494409399932:android:09f63ca79e9a6d061253f9",
+        "android_client_info": {
+          "package_name": "com.example.mobproj2020new"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFZaDnGJ1uBWS-UhuVk9aWpdrqnvbLJvY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:494409399932:android:b3a91c39f8154c2e1253f9",
+        "android_client_info": {
+          "package_name": "com.example.nexcab"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFZaDnGJ1uBWS-UhuVk9aWpdrqnvbLJvY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:494409399932:android:ed5d55142d4942001253f9",
+        "android_client_info": {
+          "package_name": "com.example.nexcabdriver"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFZaDnGJ1uBWS-UhuVk9aWpdrqnvbLJvY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
