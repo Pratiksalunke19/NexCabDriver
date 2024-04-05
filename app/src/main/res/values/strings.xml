@@ -7,7 +7,6 @@
     <string name="rides">Rides</string>
     <string name="title_inbox">Inbox</string>
     <string name="title_settings">Settings</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="empty_inbox">Oops! No messages Yet</string>
     <string name="welcomeback">Welcome Back</string>

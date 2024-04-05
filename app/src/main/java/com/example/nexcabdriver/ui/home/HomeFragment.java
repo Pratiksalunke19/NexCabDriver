@@ -83,7 +83,7 @@ public class HomeFragment extends Fragment implements RideAdapter.OnAcceptClickL
             @Override
             public void onClick(View v) {
                 // get the current location of driver
-                String currentLocation = binding.driverCurrentLocation.getText().toString();
+                currentLocation = binding.driverCurrentLocation.getText().toString();
                 // fetch and display data
                 fetchRides();
             }
@@ -151,6 +151,14 @@ public class HomeFragment extends Fragment implements RideAdapter.OnAcceptClickL
 //                hideProgressBar();
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(driver != null){
+            binding.driverCurrentLocation.setText(driver.getCurrentLocation());
+        }
     }
 
     public void showProgressBar() {

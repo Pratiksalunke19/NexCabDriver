@@ -17,6 +17,7 @@ import android.widget.Button;
 import com.example.nexcabdriver.R;
 import com.example.nexcabdriver.databinding.FragmentUpcomingRidesBinding;
 import com.example.nexcabdriver.models.Ride;
+import com.example.nexcabdriver.temp.StartRideActivityTemp;
 import com.example.nexcabdriver.ui.home.RideAdapter;
 
 import java.util.ArrayList;
@@ -55,7 +56,7 @@ public class UpcomingRidesFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),StartRideActivity.class);
+                Intent intent = new Intent(getContext(), StartRideActivityTemp.class);
                 startActivity(intent);
             }
         });

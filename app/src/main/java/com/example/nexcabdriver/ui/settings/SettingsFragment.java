@@ -41,17 +41,12 @@ public class SettingsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         mAuth = FirebaseAuth.getInstance();
-        if(mAuth == null){
-            Log.d("authentication object","object null");
-        }else{
-            Log.d("authentication object","object not null");
-        }
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         binding.buttonLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                logout(v);
+                logout();
             }
         });
 
@@ -63,17 +58,17 @@ public class SettingsFragment extends Fragment {
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
             String userId = user.getUid();
-            mDatabase.child("Users").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            mDatabase.child("Drivers").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
-//                        User userData = dataSnapshot.getValue(User.class);
-//                        if (userData != null) {
-//                            Log.d("Firstname: ", userData.getfirstname());
-//                            Log.d("Email: ", userData.getemail());
-//                            binding.textViewUserName.setText(String.format("%s %s", userData.getfirstname(), userData.getLastname()));
-//                            binding.textViewUserEmail.setText(userData.getemail());
-//                        }
+                        Driver driver = dataSnapshot.getValue(Driver.class);
+                        if (driver != null) {
+                            Log.d("Firstname: ", driver.getFirstname());
+                            Log.d("Email: ", driver.getEmail());
+                            binding.textViewUserName.setText(String.format("%s %s", driver.getFirstname(), driver.getLastname()));
+                            binding.textViewUserEmail.setText(driver.getEmail());
+                        }
                     }
                 }
 
@@ -83,6 +78,13 @@ public class SettingsFragment extends Fragment {
                 }
             });
         }
+    }
+
+    public void logout(){
+        Log.d("status","Inside logout");
+        mAuth.signOut();
+        Intent intent = new Intent(getContext(), LoginActivity.class);
+        startActivity(intent);
     }
 
     public void logout(View view) {
