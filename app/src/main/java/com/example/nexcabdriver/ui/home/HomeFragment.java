@@ -42,6 +42,7 @@ public class HomeFragment extends Fragment implements RideAdapter.OnAcceptClickL
     private String currentLocation;
     private DatabaseReference driverReference;
 
+
     private FragmentHomeBinding binding;
     @Nullable
     @Override
@@ -71,6 +72,10 @@ public class HomeFragment extends Fragment implements RideAdapter.OnAcceptClickL
 //        showProgressBar();
         initDriver(driverReference);
 
+        // set cards for driver dashboard
+        if(driver != null)
+            setCards();
+
         // check if the driver is online
         if(driver!= null && driver.getStatus().equals("online") && driver.getCurrentLocation()!= null){
             fetchRides();
@@ -84,11 +89,20 @@ public class HomeFragment extends Fragment implements RideAdapter.OnAcceptClickL
             public void onClick(View v) {
                 // get the current location of driver
                 currentLocation = binding.driverCurrentLocation.getText().toString();
+                Driver.driverLocation = currentLocation;
                 // fetch and display data
                 fetchRides();
             }
         });
     }
+
+    public void setCards(){
+        binding.tripsTextView.setText("Trips:              "+driver.getTrips());
+        binding.earningsTextView.setText("Earnings: "+driver.getEarnings());
+        binding.hoursTextView.setText("Hours:     "+driver.getHours());
+        binding.ratingsTextView.setText("Ratings: "+driver.getRatings());
+    }
+
 
     public void fetchRides(){
         if (binding.driverCurrentLocation.getText() != null) {
@@ -102,7 +116,9 @@ public class HomeFragment extends Fragment implements RideAdapter.OnAcceptClickL
                     for (DataSnapshot rideSnapshot : dataSnapshot.getChildren()) {
                         Ride ride = rideSnapshot.getValue(Ride.class);
                         if (ride != null) {
-                            rideList.add(ride);
+                            if(ride.getPickupLocation() != null){
+                                rideList.add(ride);
+                            }
                         }
                     }
                     rideAdapter.notifyDataSetChanged();
@@ -156,9 +172,13 @@ public class HomeFragment extends Fragment implements RideAdapter.OnAcceptClickL
     @Override
     public void onResume() {
         super.onResume();
-        if(driver != null){
-            binding.driverCurrentLocation.setText(driver.getCurrentLocation());
+        if(Driver.driverLocation != null){
+            Log.d("onResume: ",  Driver.driverLocation);
+            binding.driverCurrentLocation.setText(Driver.driverLocation);
         }
+
+        if(driver != null)
+            setCards();
     }
 
     public void showProgressBar() {

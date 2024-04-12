@@ -4,12 +4,24 @@ import android.util.Log;
 
 public class Driver {
     String location,firstname,lastname,email,password,currentLocation;
+    public static String profile_first_name,profile_last_name,profile_email;
 
+    public static boolean isHasUpcomingRide() {
+        return hasUpcomingRide;
+    }
+
+    public static boolean hasUpcomingRide;
+
+    public static String driverLocation;
     public String getCurrentLocation() {
         return currentLocation;
     }
 
-    int trips, hours, ratings,earnings;
+    public static void setHasUpcomingRide(boolean hasUpcomingRide) {
+        Driver.hasUpcomingRide = hasUpcomingRide;
+    }
+
+    int trips = 0, hours = 0, ratings = 3,earnings = 0;
     String status;   // status can be (offline / online/ engaged)
 
     public void setCurrentLocation(String currentLocation) {

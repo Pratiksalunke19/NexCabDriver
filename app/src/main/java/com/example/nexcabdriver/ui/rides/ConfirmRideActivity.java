@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.nexcabdriver.MainActivity;
 import com.example.nexcabdriver.R;
 import com.example.nexcabdriver.databinding.ActivityConfirmRideBinding;
+import com.example.nexcabdriver.models.Driver;
 import com.example.nexcabdriver.models.Ride;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -101,14 +102,17 @@ public class ConfirmRideActivity extends AppCompatActivity {
         details += "Date: "+ ride.getDate() + "\n\n";
         details += "Time: "+ride.getTime() + "\n\n";
         details += "Sharing: "+ (ride.isRide_sharing() ? "Enabled" : "Disabled") + "\n\n";
-        details += "Passenger count: "+ 0;
+        details += "Passenger count: "+ ride.getPassenger_count()+"\n\n";
         details += "Fair: "+ "Rs. ";
+
+        // set the driver name
+        ConfirmRideActivity.ride.setDriver_name(Driver.profile_first_name+" "+Driver.profile_last_name);
 
         binding.confirmRideDetailsTextView.setText(details);
     }
 
     public void updateRideDetails(){
-        database.getReference().child("Rides").child(ride.getPickupLocation()).child(ride.getrideId()).setValue(ride);
+        database.getReference().child("Rides").child(ride.getPickupLocation().toLowerCase()).child(ride.getRideId()).setValue(ride);
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.putExtra("selectedTab",2);
         startActivity(intent);
@@ -159,37 +163,6 @@ public class ConfirmRideActivity extends AppCompatActivity {
         }.execute();
     }
 
-//    private void sendNotification(String messageBody) {
-//        Intent intent = new Intent(this, MainActivity.class);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-//                PendingIntent.FLAG_IMMUTABLE);
-//
-//        String channelId = "Demo channel";
-//        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-//        NotificationCompat.Builder notificationBuilder =
-//                new NotificationCompat.Builder(this, channelId)
-//                        .setSmallIcon(R.mipmap.ic_launcher)
-//                        .setContentTitle("FCM Message")
-//                        .setContentText(messageBody)
-//                        .setAutoCancel(true)
-//                        .setSound(defaultSoundUri)
-//                        .setContentIntent(pendingIntent);
-//
-//        NotificationManager notificationManager =
-//                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-//
-//        // Since android Oreo notification channel is needed.
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            NotificationChannel channel = new NotificationChannel(channelId,
-//                    "Channel human readable title",
-//                    NotificationManager.IMPORTANCE_DEFAULT);
-//            notificationManager.createNotificationChannel(channel);
-//        }
-//
-//        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
-//    }
-
     public void getReceiverToken(){
         if(auth.getUid()!=null){
             DatabaseReference reference = database.getReference().child("Users").child(ride.getUserId());
@@ -201,6 +174,8 @@ public class ConfirmRideActivity extends AppCompatActivity {
                     Log.d(": ", receiverToken+" ");
 //                    Log.d("Id: ", ride.getUserId()+" ");
                     if(receiverToken != null){
+                        // set hasupcomingride
+                        Driver.setHasUpcomingRide(true);
                         // send message to client
                         sendNotification("Ride confirmation","Ride has been accepted!");
                         // update ride in database
@@ -225,12 +200,12 @@ public class ConfirmRideActivity extends AppCompatActivity {
 
     // Method to move ride details from pickup location to booked rides
     private void moveRideToBookedRides() {
-        DatabaseReference pickupLocationRef = database.getReference().child("Rides").child(ride.getPickupLocation());
-        DatabaseReference bookedRidesRef = FirebaseDatabase.getInstance().getReference().child("Rides").child("booked");
+        DatabaseReference pickupLocationRef = database.getReference().child("Rides").child(ride.getPickupLocation().toLowerCase());
+        DatabaseReference bookedRidesRef = database.getReference().child("Rides").child(ride.getPickupLocation().toLowerCase()).child("booked");
 
 
         // Get the ride details from pickup location
-        pickupLocationRef.child(ride.getrideId()).addListenerForSingleValueEvent(new ValueEventListener() {
+        pickupLocationRef.child(ride.getRideId()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // Check if the ride details exist
@@ -239,10 +214,10 @@ public class ConfirmRideActivity extends AppCompatActivity {
                     Object rideDetails = dataSnapshot.getValue();
 
                     // Remove the ride details from pickup location
-                    pickupLocationRef.child(ride.getrideId()).removeValue();
+                    pickupLocationRef.child(ride.getRideId()).removeValue();
 
                     // Add the ride details to booked rides
-                    bookedRidesRef.child(ride.getrideId()).setValue(rideDetails);
+                    bookedRidesRef.child(ride.getRideId()).setValue(rideDetails);
                 } else {
                     // Handle if ride details do not exist
                     Log.d("MoveRide", "Ride details not found at pickup location");

@@ -3,11 +3,56 @@ package com.example.nexcabdriver.models;
 import android.util.Log;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Ride implements Serializable {
-    private String pickupLocation, dropoffLocation, date, time, status,rideId;
+    private static final int MAX_PASSENGER_COUNT = 4;
+    private String pickupLocation, dropoffLocation, date, time, status,rideId,driver_name;
+    int passenger_count;
+    private List<String> passengerList;
     private boolean ride_sharing;
-    private boolean is_booked = false;
+    private boolean is_booked = false,instant= false;
+
+    public void setRideId(String rideId) {
+        this.rideId = rideId;
+    }
+
+    public void setPassenger_count(int passenger_count) {
+        this.passenger_count = passenger_count;
+    }
+
+    public void setDriver_name(String driver_name) {
+        this.driver_name = driver_name;
+    }
+
+    public String getDriver_name() {
+        return driver_name;
+    }
+
+    public int getPassenger_count() {
+        return passenger_count;
+    }
+
+    public void setInstant(boolean instant) {
+        this.instant = instant;
+    }
+
+    public String getRideId() {
+        return rideId;
+    }
+
+    public boolean isInstant() {
+        return instant;
+    }
+
+    public List<String> getPassengerList() {
+        return passengerList;
+    }
+
+    public void setPassengerList(List<String> passengerList) {
+        this.passengerList = passengerList;
+    }
 
     public boolean isIs_booked() {
         return is_booked;
@@ -22,11 +67,12 @@ public class Ride implements Serializable {
     public Ride() {
     }
 
-    public String getrideId() {
-        return rideId;
-    }
+    public Ride(String pickupLocation, String dropoffLocation, String date, String time, String status, boolean ride_sharing, String userId,boolean instant) {
 
-    public Ride(String pickupLocation, String dropoffLocation, String date, String time, String status, boolean ride_sharing, String userId) {
+        //init passenger list
+        passengerList = new ArrayList<>();
+        passengerList.add(userId);
+
         this.pickupLocation = pickupLocation;
         this.dropoffLocation = dropoffLocation;
         this.date = date;
@@ -34,10 +80,8 @@ public class Ride implements Serializable {
         this.status = status;
         this.ride_sharing = ride_sharing;
         this.userId = userId;
-    }
-
-    public void setrideId(String rideId) {
-        this.rideId = rideId;
+        this.instant = instant;
+        this.passenger_count = 1;
     }
 
     public void setStatus(String status) {
@@ -104,7 +148,7 @@ public class Ride implements Serializable {
                 "Time: "+this.getTime()+"\n"+
                 "Status: "+this.getStatus()+"\n"+
                 "User id: "+this.getUserId()+"\n"+
-                "Ride id: "+this.getrideId()+"\n"+
+                "Ride id: "+this.getRideId()+"\n"+
                 "Ride Sharing: "+this.isRide_sharing()+"\n"+
                 "Is booked: "+this.is_booked+"\n";
         Log.d("Ride details: ",details);

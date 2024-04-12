@@ -66,6 +66,9 @@ public class SettingsFragment extends Fragment {
                         if (driver != null) {
                             Log.d("Firstname: ", driver.getFirstname());
                             Log.d("Email: ", driver.getEmail());
+                            Driver.profile_first_name = driver.getFirstname();
+                            Driver.profile_last_name = driver.getLastname();
+                            Driver.profile_email = driver.getEmail();
                             binding.textViewUserName.setText(String.format("%s %s", driver.getFirstname(), driver.getLastname()));
                             binding.textViewUserEmail.setText(driver.getEmail());
                         }
@@ -77,6 +80,18 @@ public class SettingsFragment extends Fragment {
                     // Handle error
                 }
             });
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if(Driver.profile_first_name == null || Driver.profile_email == null){
+            populateUserData();
+        }else{
+            binding.textViewUserName.setText(String.format("%s %s", Driver.profile_first_name,Driver.profile_last_name));
+            binding.textViewUserEmail.setText(Driver.profile_email);
         }
     }
 

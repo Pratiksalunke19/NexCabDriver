@@ -102,18 +102,18 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.RideViewHolder
         String result = "Pickup Location: "+ride.getPickupLocation()+"\n";
         result += "Dropoff Location: "+ride.getDropoffLocation()+"\n";
         result += "Date: "+ride.getDate()+"\n";
-        result += "Time: "+ roundOffToNearestMinute(ride.getTime());
+        result += "Time: "+ (ride.getTime());
 
         return result;
     }
 
-    public static String roundOffToNearestMinute(String time) {
-        if (time == null) {
-            return "";
-        }
-        String[] parts = time.split(":"); // Split time string by colon
-        int hour = Integer.parseInt(parts[0]); // Extract hour component
-        int minute = Integer.parseInt(parts[1]); // Extract minute component
-        return String.format("%02d:%02d", hour, minute); // Format and return rounded time
-    }
+//    public static String roundOffToNearestMinute(String time) {
+//        if (time == null) {
+//            return "";
+//        }
+//        String[] parts = time.split(":"); // Split time string by colon
+//        int hour = Integer.parseInt(parts[0]); // Extract hour component
+//        int minute = Integer.parseInt(parts[1]); // Extract minute component
+//        return String.format("%02d:%02d", hour, minute); // Format and return rounded time
+//    }
 }

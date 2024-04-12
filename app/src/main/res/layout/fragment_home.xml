@@ -76,6 +76,7 @@
             android:layout_marginEnd="10dp">
 
             <TextView
+                android:id="@+id/tripsTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -94,6 +95,7 @@
             android:layout_marginStart="10dp">
 
             <TextView
+                android:id="@+id/earningsTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -119,6 +121,7 @@
             android:layout_marginEnd="10dp">
 
             <TextView
+                android:id="@+id/hoursTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -137,6 +140,7 @@
             android:layout_marginStart="10dp">
 
             <TextView
+                android:id="@+id/ratingsTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"

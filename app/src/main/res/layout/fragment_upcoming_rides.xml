@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18dp"
-        android:padding="10dp"/>
+        android:padding="10dp"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/startRideButton"
@@ -19,7 +20,17 @@
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:text="Start Ride"
-        android:padding="10dp"
-        android:layout_margin="10dp"/>
+        android:padding="20dp"
+        android:layout_margin="10dp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/noUpcomingRidesTextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:text="Oops! No upcoming rides!"
+        android:textSize="25dp"
+        android:gravity="center"/>
 
 </LinearLayout>

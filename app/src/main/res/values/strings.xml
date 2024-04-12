@@ -20,4 +20,5 @@
     <string name="lastname">Lastname</string>
     <string name="passwordrepeat">Repeat password</string>
     <string name="signup">SIGN UP</string>
+    <string name="google_maps_key">AIzaSyC--vUzwAXZ2JVkEzHF2tf9wYvNCAwQ5JI</string>
 </resources>

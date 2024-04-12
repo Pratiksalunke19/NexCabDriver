@@ -2,8 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -15,6 +17,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NexCabDriver"
         tools:targetApi="31">
+        <activity
+            android:name=".temp.StartRideMapsActivity"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyA6Y2BX-uF7ttWvfucY47nRsIUuz_LpJJE" />
+
+        <activity
+            android:name=".StartRideMapActivity"
+            android:exported="false" />
         <activity
             android:name=".temp.StartRideActivityTemp"
             android:exported="false" />

@@ -11,10 +11,10 @@
         android:icon="@drawable/rides"
         android:title="@string/rides"/>
 
-    <item
-        android:id="@+id/navigation_inbox"
-        android:icon="@drawable/inbox"
-        android:title="@string/title_inbox"/>
+<!--    <item-->
+<!--        android:id="@+id/navigation_inbox"-->
+<!--        android:icon="@drawable/inbox"-->
+<!--        android:title="@string/title_inbox"/>-->
 
     <item
         android:id="@+id/navigation_settings"
